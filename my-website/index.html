@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ar-jay Apostol Abuel | My Personal Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            min-height: 100vh;
+            padding: 2rem 1.5rem;
+            position: relative;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: 0;
+            font-size: 1.5rem;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bio-card {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 2rem;
+            overflow: hidden;
+            box-shadow: 0 35px 55px rgba(0, 0, 0, 0.35);
+            transition: transform 0.25s ease;
+        }
+
+        .bio-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1f2b3c, #0f1722);
+            color: white;
+            padding: 2rem 1.5rem 1.8rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffefcf;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+            transition: transform 0.2s ease;
+        }
+
+        .avatar-img:hover {
+            transform: scale(1.03);
+        }
+
+        .header h1 {
+            font-size: 2.1rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.4rem;
+        }
+
+        .relationship-badge {
+            display: inline-block;
+            background: linear-gradient(95deg, #e43a3a, #b81c1c);
+            padding: 0.35rem 1.4rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.7rem;
+            animation: gentlePulse 2.2s infinite;
+        }
+
+        @keyframes gentlePulse {
+            0% { transform: scale(1);}
+            50% { transform: scale(1.05);}
+            100% { transform: scale(1);}
+        }
+
+        .badge-location {
+            display: inline-block;
+            background: rgba(255,255,240,0.2);
+            backdrop-filter: blur(3px);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+        }
+
+        .tabs-container {
+            background: #fef9f0;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid #ffd8b5;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            list-style: none;
+            padding: 0.6rem 0 0 0;
+            margin: 0;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 2rem 2rem 0 0;
+            cursor: pointer;
+            font-family: inherit;
+            color: #2d3e50;
+            background: #f3ede3;
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #c0392b;
+            border-bottom: 3px solid #e74c3c;
+        }
+
+        .tab-btn:hover:not(.active) {
+            background: #ffe6d5;
+            color: #b4341f;
+        }
+
+        .tab-panels {
+            background: white;
+            padding: 2rem 1.8rem;
+            min-height: 440px;
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeSlide 0.25s ease-out;
+        }
+
+        .tab-panel.active-panel {
+            display: block;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-mini {
+            margin-bottom: 1.8rem;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-left: 5px solid #e74c3c;
+            padding-left: 0.9rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 0.9rem;
+        }
+
+        .info-item {
+            background: #faf6ef;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            border: 1px solid #ffe0c0;
+        }
+
+        .info-item:hover {
+            background: #fff2e4;
+            transform: translateX(5px);
+        }
+
+        .info-label {
+            font-weight: 700;
+            color: #b64926;
+            min-width: 100px;
+        }
+
+        .info-value {
+            color: #2c3e50;
+        }
+
+        .hobbies-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .hobby-tag {
+            background: linear-gradient(105deg, #1e2f3f, #2c3e50);
+            color: white;
+            padding: 0.6rem 1.3rem;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: default;
+        }
+
+        .hobby-tag:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(105deg, #c0392b, #a52618);
+        }
+
+        .family-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .family-card {
+            background: linear-gradient(125deg, #fff2e6, #fffbf5);
+            padding: 1.3rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid #ffe0bf;
+        }
+
+        .family-card:hover {
+            transform: translateY(-6px);
+            background: #fff0e2;
+        }
+
+        .family-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 0.8rem;
+            border: 3px solid #e74c3c;
+            transition: transform 0.2s;
+            display: block;
+        }
+
+        .family-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .family-role {
+            font-weight: 800;
+            color: #bc3f2e;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .family-name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #1e2f3c;
+        }
+
+        .group-photo-container {
+            background: linear-gradient(135deg, #fff5ec, #ffe8d8);
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            text-align: center;
+            margin-bottom: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .group-photo-container:hover {
+            background: linear-gradient(135deg, #fff0e4, #ffe0cc);
+            transform: translateY(-3px);
+        }
+
+        .group-photo-label {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #c0392b;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .group-photo {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 1.2rem;
+            object-fit: cover;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 0 auto;
+        }
+
+        .group-photo:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .fav-item {
+            background: #fef3ea;
+            padding: 0.8rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 0.7rem;
+            border-left: 4px solid #e67e22;
+        }
+
+        .fav-label {
+            font-weight: 700;
+            color: #b6492c;
+            display: inline-block;
+            min-width: 140px;
+        }
+
+        .quote-box {
+            background: linear-gradient(105deg, #1e2a36, #121b24);
+            color: #f9e0c0;
+            padding: 1.2rem;
+            border-radius: 1.3rem;
+            text-align: center;
+            margin-top: 1.2rem;
+            font-style: italic;
+        }
+
+        .bio-short {
+            background: #fef6e8;
+            padding: 1.2rem;
+            border-radius: 1.2rem;
+            line-height: 1.65;
+            color: #2c3e47;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .footer {
+            background: #0f1722;
+            color: #aaa9c0;
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 640px) {
+            body { padding: 1rem; }
+            .tab-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+            .tab-panels { padding: 1.3rem; }
+            .avatar { width: 110px; height: 110px; }
+            .family-photo { width: 80px; height: 80px; }
+            .group-photo { max-width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="floating-hearts" id="heartsContainer"></div>
+
+<div class="container">
+    <div class="bio-card">
+        <div class="header">
+            <div class="avatar" id="avatarContainer">
+                <img class="avatar-img" id="profileImage" src="images/profile.jpg" alt="Ar-jay">
+            </div>
+            
+            <h1>Ar-jay Apostol Abuel</h1>
+            <div class="badge-location">📍 Purok Waya-waya, Lambayong, Sultan Kudarat</div>
+            <div class="relationship-badge">💖 In a Relationship 💖</div>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="tabPersonal">📋 Personal Info</button>
+                <button class="tab-btn" data-tab="tabHobbies">🎯 Hobbies & Fun</button>
+                <button class="tab-btn" data-tab="tabFamily">👨‍👩‍👧 My Family</button>
+            </div>
+        </div>
+
+        <div class="tab-panels">
+            <div class="tab-panel active-panel" id="tabPersonal">
+                <div class="section-mini">
+                    <div class="section-title"><span>💬</span> About Me</div>
+                    <div class="bio-short">
+                        Hey there! I'm <strong>Ar-jay Apostol Abuel</strong>, a student from Lambayong, Sultan Kudarat. 
+                        I'm a <strong>jolly and kind-hearted</strong> person, a bit noisy and easily irritated sometimes, 
+                        but I have a <strong>BIG heart</strong> for those I love! 🫶 I am a devoted member of the 
+                        <strong>Iglesia ni Cristo</strong> and my faith keeps me strong.
+                    </div>
+                </div>
+
+                <div class="section-mini">
+                    <div class="section-title"><span>📌</span> My Details</div>
+                    <div class="info-grid">
+                        <div class="info-item"><span class="info-label">📍 Home:</span><span class="info-value">Purok Waya-waya, Lambayong, Sultan Kudarat</span></div>
+                        <div class="info-item"><span class="info-label">📚 Occupation:</span><span class="info-value">Student</span></div>
+                        <div class="info-item"><span class="info-label">💖 Relationship:</span><span class="info-value">In a Relationship ❤️</span></div>
+                        <div class="info-item"><span class="info-label">📏 Height:</span><span class="info-value">163 cm</span></div>
+                        <div class="info-item"><span class="info-label">⚖️ Weight:</span><span class="info-value">50 kg</span></div>
+                        <div class="info-item"><span class="info-label">⛪ Religion:</span><span class="info-value">Iglesia ni Cristo</span></div>
+                    </div>
+                </div>
+
+                <div class="section-mini">
+                    <div class="section-title"><span>⭐</span> My Favorites</div>
+                    <div class="fav-item"><span class="fav-label">🍜 Favorite Food:</span> Palabok</div>
+                    <div class="fav-item"><span class="fav-label">🎬 Favorite Movie:</span> Fast and Furious</div>
+                    <div class="fav-item"><span class="fav-label">🎵 Favorite Artist:</span> Adele</div>
+                </div>
+
+                <div class="quote-box">💬 "Be yourself; everyone else is already taken." ― Oscar Wilde 💬</div>
+            </div>
+
+            <div class="tab-panel" id="tabHobbies">
+                <div class="section-mini">
+                    <div class="section-title"><span>🎯</span> What I Love To Do</div>
+                    <div class="hobbies-list">
+                        <span class="hobby-tag">🎬 Watch Anime</span>
+                        <span class="hobby-tag">🏓 Play Pickleball</span>
+                        <span class="hobby-tag">🎯 Play Darts</span>
+                        <span class="hobby-tag">🎵 Sing Adele Songs</span>
+                        <span class="hobby-tag">💖 Spend Time with My Love</span>
+                        <span class="hobby-tag">🍿 Movie marathons</span>
+                    </div>
+                </div>
+                <div class="quote-box">💬 "Live as if you were to die tomorrow. Learn as if you were to live forever.”
+― Mahatma Gandhi💬</div>
+            </div>
+
+            <div class="tab-panel" id="tabFamily">
+                <div class="group-photo-container">
+                    <div class="group-photo-label">
+                        📸 <span>Our Family Picture</span> 📸
+                    </div>
+                    <img class="group-photo" id="familyPhoto" src="images/family.jpg" alt="Family Picture">
+                </div>
+
+                <div class="section-mini">
+                    <div class="section-title"><span>👨‍👩‍👧</span> My Beloved Family Members</div>
+                    <div class="family-grid">
+                        <div class="family-card">
+                            <img class="family-photo" id="dadPhoto" src="images/dad.jpg" alt="Dad">
+                            <div class="family-role">👨 Father</div>
+                            <div class="family-name">Edgar Ramos Abuel</div>
+                        </div>
+                        <div class="family-card">
+                            <img class="family-photo" id="momPhoto" src="images/mom.jpg" alt="Mom">
+                            <div class="family-role">👩 Mother</div>
+                            <div class="family-name">Nedy Apostol Abuel</div>
+                        </div>
+                        <div class="family-card">
+                            <img class="family-photo" id="sisPhoto" src="images/sis.jpg" alt="Sister">
+                            <div class="family-role">👧 Sister</div>
+                            <div class="family-name">Honey Lou Apostol Abuel</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bio-short" style="background:#fdf1e3;">
+                    My family is my anchor. My mom <strong>Nedy</strong> has the kindest soul, my dad <strong>Edgar</strong> works hard, 
+                    and my sister <strong>Honey Lou</strong> is my forever best friend. They are the reason I keep a big heart ❤️.
+                </div>
+
+                <div class="quote-box" style="background: #2e2c2a;">💖 "No matter what, my family comes first!" 💖</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            💫 Ar-jay Apostol Abuel — Jolly, loving, and proudly INC | Lambayong, Sultan Kudarat 💫
+        </div>
+    </div>
+</div>
+
+<script>
+    // Floating hearts animation
+    function createFloat() {
+        const floatIcon = document.createElement('div');
+        floatIcon.classList.add('heart');
+        const icons = ['❤️', '🧡', '💖', '🌸', '⭐', '🎯', '🙉', '🎵', '💘', '💝'];
+        floatIcon.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+        floatIcon.style.left = Math.random() * 100 + '%';
+        floatIcon.style.animationDuration = Math.random() * 6 + 5 + 's';
+        floatIcon.style.fontSize = Math.random() * 20 + 16 + 'px';
+        floatIcon.style.opacity = Math.random() * 0.6 + 0.3;
+        document.getElementById('heartsContainer').appendChild(floatIcon);
+        setTimeout(() => floatIcon.remove(), 8000);
+    }
+    setInterval(createFloat, 680);
+    
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.tab-panel');
+    
+    function switchTab(tabId) {
+        panels.forEach(panel => panel.classList.remove('active-panel'));
+        tabBtns.forEach(btn => btn.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active-panel');
+        const clickedBtn = Array.from(tabBtns).find(btn => btn.dataset.tab === tabId);
+        if (clickedBtn) clickedBtn.classList.add('active');
+    }
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+    });
+</script>
+</body>
+</html>
